@@ -14,40 +14,17 @@ class LoginPage extends StatelessWidget {
           // spacing: 30,
           children: [
             // Logo
-            _Logo(),
+            Logo(),
 
             // Form
             _Form(),
 
             // Labels
-            _Labels(),
+            Labels(),
 
             // Terminos y condiciones
             _Terminos(),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class _Logo extends StatelessWidget {
-  const _Logo();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: 50),
-      child: Center(
-        child: SizedBox(
-          width: 170,
-          child: Column(
-            // spacing: 20,
-            children: [
-              Image.asset('assets/tag-logo.png'),
-              Text('Messenger', style: TextStyle(fontSize: 30)),
-            ],
-          ),
         ),
       ),
     );
@@ -60,6 +37,9 @@ class _Form extends StatefulWidget {
 }
 
 class __FormState extends State<_Form> {
+  final emailCtrl = TextEditingController();
+  final passCtrl = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -69,49 +49,33 @@ class __FormState extends State<_Form> {
       child: Column(
         // spacing: 20,
         children: [
-          CustomInput(),
-          CustomInput(),
-          CustomInput(),
-          SizedBox(height: 10),
+          CustomInput(
+            hintText: 'Email',
+            icon: Icons.mail_outline,
+            keyboardType: TextInputType.emailAddress,
+            textController: emailCtrl,
+            isPassword: false,
+          ),
+          CustomInput(
+            hintText: 'Password',
+            icon: Icons.lock_outline,
+            keyboardType: TextInputType.visiblePassword,
+            textController: passCtrl,
+            isPassword: true,
+          ),
+
           ElevatedButton(
             style: ButtonStyle(elevation: WidgetStateProperty.all(0)),
 
             onPressed: () {
               // Navigator.pushNamed(context, 'register');
+              print(emailCtrl.text);
+              print(passCtrl.text);
             },
             child: const Text('Login'),
           ),
         ],
       ),
-    );
-  }
-}
-
-class _Labels extends StatelessWidget {
-  const _Labels();
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      // spacing: 10,
-      children: [
-        Text(
-          'No tienes cuenta?',
-          style: TextStyle(
-            color: Colors.black45,
-            fontSize: 15,
-            fontWeight: FontWeight.w300,
-          ),
-        ),
-        Text(
-          'Crear nueva cuenta?',
-          style: TextStyle(
-            color: Colors.blue[600],
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ],
     );
   }
 }
