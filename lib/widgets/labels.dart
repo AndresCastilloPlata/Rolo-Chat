@@ -1,27 +1,41 @@
 import 'package:flutter/material.dart';
 
 class Labels extends StatelessWidget {
-  const Labels({super.key});
+  final String routeName;
+  final String title;
+  final String subTitle;
+
+  const Labels({
+    super.key,
+    required this.routeName,
+    required this.title,
+    required this.subTitle,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      // spacing: 10,
+      spacing: 10,
       children: [
         Text(
-          'No tienes cuenta?',
+          title,
           style: TextStyle(
             color: Colors.black45,
             fontSize: 15,
             fontWeight: FontWeight.w300,
           ),
         ),
-        Text(
-          'Crear nueva cuenta?',
-          style: TextStyle(
-            color: Colors.blue[600],
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
+        GestureDetector(
+          onTap: () {
+            Navigator.pushReplacementNamed(context, routeName);
+          },
+          child: Text(
+            subTitle,
+            style: TextStyle(
+              color: Colors.blue[600],
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ],

@@ -18,13 +18,17 @@ class LoginPage extends StatelessWidget {
               // spacing: 30,
               children: [
                 // Logo
-                Logo(),
+                Logo(title: 'Messenger'),
 
                 // Form
                 _Form(),
 
                 // Labels
-                Labels(),
+                Labels(
+                  routeName: 'register',
+                  title: 'No tienes cuenta?',
+                  subTitle: 'Crear una cuenta!',
+                ),
 
                 // Terminos y condiciones
                 _Terminos(),
