@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rolo_chat/widgets/widgets.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -61,22 +62,27 @@ class _Form extends StatefulWidget {
 class __FormState extends State<_Form> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      // spacing: 20,
-      children: [
-        TextField(),
-        TextField(),
-        SizedBox(height: 30),
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 60),
+      margin: EdgeInsets.only(top: 40),
 
-        ElevatedButton(
-          style: ButtonStyle(elevation: WidgetStateProperty.all(0)),
+      child: Column(
+        // spacing: 20,
+        children: [
+          CustomInput(),
+          CustomInput(),
+          CustomInput(),
+          SizedBox(height: 10),
+          ElevatedButton(
+            style: ButtonStyle(elevation: WidgetStateProperty.all(0)),
 
-          onPressed: () {
-            // Navigator.pushNamed(context, 'register');
-          },
-          child: const Text('Login'),
-        ),
-      ],
+            onPressed: () {
+              // Navigator.pushNamed(context, 'register');
+            },
+            child: const Text('Login'),
+          ),
+        ],
+      ),
     );
   }
 }
