@@ -63,16 +63,12 @@ class __FormState extends State<_Form> {
             textController: passCtrl,
             isPassword: true,
           ),
-
-          ElevatedButton(
-            style: ButtonStyle(elevation: WidgetStateProperty.all(0)),
-
+          BotonAzul(
+            textButton: 'Login',
             onPressed: () {
-              // Navigator.pushNamed(context, 'register');
-              print(emailCtrl.text);
-              print(passCtrl.text);
+              print('Email:${emailCtrl.text}');
+              print('Password:${passCtrl.text}');
             },
-            child: const Text('Login'),
           ),
         ],
       ),
