@@ -13,7 +13,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Rolo Chat',
-      initialRoute: 'login',
+      initialRoute: 'usuarios',
       routes: appRoutes,
     );
   }
