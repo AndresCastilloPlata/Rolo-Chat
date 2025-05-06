@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rolo_chat/routes/routes.dart';
+import 'package:rolo_chat/services/auth_service.dart';
 
 void main() {
   runApp(const MainApp());
@@ -10,11 +12,14 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Rolo Chat',
-      initialRoute: 'usuarios',
-      routes: appRoutes,
+    return MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => AuthService())],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Rolo Chat',
+        initialRoute: 'loading',
+        routes: appRoutes,
+      ),
     );
   }
 }

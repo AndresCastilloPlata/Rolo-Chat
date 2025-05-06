@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:rolo_chat/helpers/mostral_alerta.dart';
+import 'package:rolo_chat/services/auth_service.dart';
 import 'package:rolo_chat/widgets/widgets.dart';
 
 class LoginPage extends StatelessWidget {
@@ -52,6 +55,8 @@ class __FormState extends State<_Form> {
 
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 60),
       margin: EdgeInsets.only(top: 40),
@@ -75,10 +80,28 @@ class __FormState extends State<_Form> {
           ),
           BotonAzul(
             textButton: 'Login',
-            onPressed: () {
-              print('Email:${emailCtrl.text}');
-              print('Password:${passCtrl.text}');
-            },
+            onPressed:
+                authService.autenticando
+                    ? null
+                    : () async {
+                      FocusScope.of(context).unfocus();
+                      final loginOk = await authService.login(
+                        emailCtrl.text.trim(),
+                        passCtrl.text.trim(),
+                      );
+
+                      if (loginOk) {
+                        // conetar socket server
+                        // navegar otra pantalla
+                        Navigator.pushReplacementNamed(context, 'usuarios');
+                      } else {
+                        mostrarAlerta(
+                          context,
+                          'Login incorrecto',
+                          'Valide sus credenciales',
+                        );
+                      }
+                    },
           ),
         ],
       ),
