@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rolo_chat/helpers/mostral_alerta.dart';
-import 'package:rolo_chat/services/auth_service.dart';
+import 'package:rolo_chat/services/services.dart';
 import 'package:rolo_chat/widgets/widgets.dart';
 
 class LoginPage extends StatelessWidget {
@@ -56,6 +56,7 @@ class __FormState extends State<_Form> {
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
+    final socketService = Provider.of<SocketService>(context);
 
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 60),
@@ -92,6 +93,7 @@ class __FormState extends State<_Form> {
 
                       if (loginOk) {
                         // conetar socket server
+                        socketService.connect();
                         // navegar otra pantalla
                         Navigator.pushReplacementNamed(context, 'usuarios');
                       } else {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rolo_chat/pages/pages.dart';
-import 'package:rolo_chat/services/auth_service.dart';
+import 'package:rolo_chat/services/services.dart';
 
 class LoadingPage extends StatelessWidget {
   const LoadingPage({super.key});
@@ -20,12 +20,13 @@ class LoadingPage extends StatelessWidget {
 
   Future checkLoginState(BuildContext context) async {
     final authService = Provider.of<AuthService>(context, listen: false);
+    final socketService = Provider.of<SocketService>(context, listen: false);
 
     final autenticado = await authService.isLoggedIn();
 
     if (autenticado) {
-      //todo conectar al socket server
-      // Navigator.pushReplacementNamed(context, 'usuarios');
+      socketService.connect();
+
       Navigator.pushReplacement(
         context,
         PageRouteBuilder(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rolo_chat/helpers/mostral_alerta.dart';
-import 'package:rolo_chat/services/auth_service.dart';
+import 'package:rolo_chat/services/services.dart';
 import 'package:rolo_chat/widgets/widgets.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -57,6 +57,7 @@ class __FormState extends State<_Form> {
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
+    final socketService = Provider.of<SocketService>(context);
 
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 60),
@@ -92,9 +93,9 @@ class __FormState extends State<_Form> {
                 authService.autenticando
                     ? null
                     : () async {
-                      print('Name:${nameCtrl.text}');
-                      print('Email:${emailCtrl.text}');
-                      print('Password:${passCtrl.text}');
+                      // print('Name:${nameCtrl.text}');
+                      // print('Email:${emailCtrl.text}');
+                      // print('Password:${passCtrl.text}');
 
                       final registroOk = await authService.register(
                         nameCtrl.text,
@@ -103,7 +104,7 @@ class __FormState extends State<_Form> {
                       );
 
                       if (registroOk == true) {
-                        // todo: conectar socket server
+                        socketService.connect();
                         Navigator.pushReplacementNamed(context, 'usuarios');
                       } else {
                         mostrarAlerta(
